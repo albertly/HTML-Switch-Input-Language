@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .container {
+        width: 50%;
+        margin: 50px auto;
+        background: #cccc;
+    }
+</style>
+
+<body>
+    <div dir="rtl" class="container">
+        <div><input type="text" name="whatever" lang="fa" /></div>
+        <div> <input type="text" name="txtHeb" id="txtHeb" onkeypress="printKey()" /> </div>
+    </div>
+</body>
+<script src="./SwitchInputLan.js"></script>
+<script>
+    const txt = document.getElementById("txtHeb");
+
+    function printKey() {
+        var e = event;
+        var key = e.which || e.charCode || e.keyCode;
+        console.log('key ' + key);
+    }
+</script>
+
+</html>
