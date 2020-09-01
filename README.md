@@ -9,3 +9,7 @@ We would need to call Win API function SystemParametersInfo, that is impossible 
 However it could be very useful for users with multi language system (e.g. switch automatically a language when input field gets a focus).
 
 Solution -  Capture the keydown event and replace the character.
+
+
+
+[Demo Page](https://albertly.github.io/HTML-Switch-Input-Language/index.html)
