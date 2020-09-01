@@ -10,6 +10,12 @@ However it could be very useful for users with multi language system (e.g. switc
 
 Solution -  Capture the keydown event and replace the character.
 
+Usage
+```javascript
+<input type="text" name="hebInput" id="hebInput" data-lang="he" />
 
+<textarea cols="22" rows="7" name="hebArea" id="hebArea" data-lang="he"> </textarea>
 
+<script src="./SwitchInputLan.js"></script>
+```
 [Demo Page](https://albertly.github.io/HTML-Switch-Input-Language/index.html)
