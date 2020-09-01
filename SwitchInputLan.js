@@ -50,7 +50,8 @@ if (
 
 // Farsi keyboard map based on Iran Popular Keyboard Layout
 // prettier-ignore
-var  farsiTable = [
+var farsiObjs = {
+  mapTable : [
   32,	33,	34,	35,	36,	37,	1548,	1711,
   41,	40,	215,	43,	1608,	45,	46,	47,
   48,	49,	50,	51,	52,	53,	54,	55,
@@ -63,36 +64,40 @@ var  farsiTable = [
   1575,	1607,	1578,	1606,	1605,	1574,	1583,	1582,
   1581,	1590,	1602,	1587,	1601,	1593,	1585,	1589,
   1591,	1594,	1592,	60,	124,	62,	1617
-];
+  ],
+  btnLabel: 'fa',
+  langName: 'Farsi'
+};
 
 // Hebrew keyboard map based on Hebrew Keyboard Layout SI-1452 (Hebrew-QWERTY)
 // prettier-ignore
-var  hebrewTable = [
-  32,	33,	34,	35,	36,	37,	38,	44 /*,*/,
-  41,	40,	42,	43,	1514 /*tav*/,	45,	1509 /*zadikS*/,	46 /*.*/,
-  48,	49,	50,	51,	52,	53,	54,	55,
-  56,	57,	58,	1507 /*peyS*/,	60,	61,	62,	63,
-  64,	65,	66,	67,	68,	69,	70,	71,
-  72,	73,	74,	75,	76,	77,	78,	79,
-  80,	81,	82,	83,	84,	85,	86,	87,
-  88,	89,	90,	91,	92,	93,	94,	95,
-  59 /*;*/,	1513 /*shin*/,	1504 /*nun*/,	1489 /*bet*/,	1490 /*gimel*/,	1511 /*kuf*/,	1499 /*kaf*/,	1506 /*ain*/,
-  1497 /*yod*/,	1503 /*nunS*/,	1495 /*het*/,	1500 /*lamed*/,	1498 /*kafS*/,	1510 /*zadik*/,	1502 /*mem*/,	1501 /*memS*/,
-  1508 /*pey*/,	47 /* / */,	1512 /*reish*/,	1491 /*dalet*/,	1488 /*alef*/,	1493 /*vav*/,	1492 /*hey*/,	39 /*'*/,
-  1505 /*sameh*/,	1496 /*tet*/,	1494 /*zain*/,	123,	124,	125,	126
-];
+var  hebrewObjs = {
+  mapTable : [
+    32,	33,	34,	35,	36,	37,	38,	44 /*,*/,
+    41,	40,	42,	43,	1514 /*tav*/,	45,	1509 /*zadikS*/,	46 /*.*/,
+    48,	49,	50,	51,	52,	53,	54,	55,
+    56,	57,	58,	1507 /*peyS*/,	60,	61,	62,	63,
+    64,	65,	66,	67,	68,	69,	70,	71,
+    72,	73,	74,	75,	76,	77,	78,	79,
+    80,	81,	82,	83,	84,	85,	86,	87,
+    88,	89,	90,	91,	92,	93,	94,	95,
+    59 /*;*/,	1513 /*shin*/,	1504 /*nun*/,	1489 /*bet*/,	1490 /*gimel*/,	1511 /*kuf*/,	1499 /*kaf*/,	1506 /*ain*/,
+    1497 /*yod*/,	1503 /*nunS*/,	1495 /*het*/,	1500 /*lamed*/,	1498 /*kafS*/,	1510 /*zadik*/,	1502 /*mem*/,	1501 /*memS*/,
+    1508 /*pey*/,	47 /* / */,	1512 /*reish*/,	1491 /*dalet*/,	1488 /*alef*/,	1493 /*vav*/,	1492 /*hey*/,	39 /*'*/,
+    1505 /*sameh*/,	1496 /*tet*/,	1494 /*zain*/,	123,	124,	125,	126
+  ],
+  btnLabel: 'ע',
+  langName: 'Hebrew'
+};
 
 var Switcher = {
-  // Farsi keyboard map based on Iran Popular Keyboard Layout
-
   keyTable: [],
-
   Type: true,
   counter: 0,
   ShowChangeLangButton: 1, // 0: Hidden / 1: Visible
-  KeyBoardError: 0, // 0: Disable FarsiType / 1: Show Error
+  KeyBoardError: 1, // 0: Disable FarsiType / 1: Show Error
   ChangeDir: 0, // 0: No Action / 1: Do Rtl-Ltr / 2: Rtl-Ltr button
-  UnSupportedAction: 0, //0: Disable FarsiType / 1: Low Support
+  UnSupportedAction: 1, //0: Disable FarsiType / 1: Low Support
 };
 
 Switcher.enable_disable = function (Dis) {
@@ -137,11 +142,15 @@ Switcher.init = function (event, lang = 'he') {
   switch (lang.toLowerCase()) {
     case 'he':
     case 'he-il':
-      Switcher.keyTable = hebrewTable;
+      Switcher.keyTable = hebrewObjs.mapTable;
+      Switcher.lang = hebrewObjs.langName;
+      Switcher.btnLabel = hebrewObjs.btnLabel;
       break;
     case 'fa':
     case 'fa-ir':
-      Switcher.keyTable = farsiTable;
+      Switcher.keyTable = farsiObjs.mapTable;
+      Switcher.lang = farsiObjs.langName;
+      Switcher.btnLabel = farsiObjs.btnLabel;
       break;
   }
 
@@ -184,7 +193,9 @@ Switcher.KeyObject = function (z, x) {
       GenerateStr +
       "<input type='button' id=FarsiType_button_" +
       x +
-      " style='border: none; background-color:darkblue; font-size:11; color:white; font-family:tahoma; padding: 1px; margin: 1px; width: auto; height: auto; position: absolute' value='ע' />&nbsp;";
+      " style='border: none; background-color:darkblue; font-size:11; color:white; font-family:tahoma; padding: 1px; margin: 1px; width: auto; height: auto; position: absolute' value='" +
+      Switcher.btnLabel +
+      "' />&nbsp;";
   }
   if (Switcher.ChangeDir == 2) {
     GenerateStr =
@@ -197,7 +208,7 @@ Switcher.KeyObject = function (z, x) {
 
   if (Switcher.ShowChangeLangButton == 1) {
     z.bottelm = document.getElementById('FarsiType_button_' + x);
-    z.bottelm.title = 'Change lang to english';
+    z.bottelm.title = 'Change language to English';
   }
   if (Switcher.ChangeDir == 2) {
     z.Direlm = document.getElementById('FarsiType_ChangeDir_' + x);
@@ -240,7 +251,7 @@ Switcher.KeyObject = function (z, x) {
         z.farsi = false;
         if (Switcher.ShowChangeLangButton == 1) {
           z.bottelm.value = 'EN';
-          z.bottelm.title = 'Change lang to hebrew';
+          z.bottelm.title = 'Change language to ' + Switcher.lang;
         }
         if (Switcher.ChangeDir == 1) {
           z.style.textAlign = 'left';
@@ -249,8 +260,8 @@ Switcher.KeyObject = function (z, x) {
       } else {
         z.farsi = true;
         if (Switcher.ShowChangeLangButton == 1) {
-          z.bottelm.value = 'ע';
-          z.bottelm.title = 'Change lang to english';
+          z.bottelm.value = Switcher.btnLabel;
+          z.bottelm.title = 'Change language to English';
         }
         if (Switcher.ChangeDir == 1) {
           z.style.textAlign = 'right';
@@ -290,12 +301,15 @@ Switcher.KeyObject = function (z, x) {
 
       //check windows lang
       if (key > 128) {
-        if (Switcher.KeyBoardError == 0) {
-          Switcher.Disable();
-        } else {
-          alert('Please change your windows language to English');
-          return false;
+        if (Switcher.lang === farsiObjs.langName) {
+          if (Switcher.KeyBoardError == 0) {
+            Switcher.Disable();
+          } else {
+            alert('Please change your windows language to English');
+            return false;
+          }
         }
+        return true;
       }
 
       // If Farsi
@@ -305,10 +319,14 @@ Switcher.KeyObject = function (z, x) {
           (key >= 65 && key <= 90 && !e.shiftKey) ||
           (key >= 97 && key <= 122 && e.shiftKey)
         ) {
-          alert(
-            'Caps Lock is On. To prevent entering farsi incorrectly, you should press Caps Lock to turn it off.'
-          );
-          return false;
+          if (Switcher.lang === farsiObjs.langName) {
+            alert(
+              'Caps Lock is On. To prevent entering farsi incorrectly, you should press Caps Lock to turn it off.'
+            );
+            return false;
+          }
+
+          return true;
         }
 
         // Shift-space -> ZWNJ
