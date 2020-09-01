@@ -48,62 +48,68 @@ if (
   };
 }
 
-var FarsiType = {
+// Farsi keyboard map based on Iran Popular Keyboard Layout
+// prettier-ignore
+var  farsiTable = [
+  32,	33,	34,	35,	36,	37,	1548,	1711,
+  41,	40,	215,	43,	1608,	45,	46,	47,
+  48,	49,	50,	51,	52,	53,	54,	55,
+  56,	57,	58,	1705,	44,	61,	46,	1567,
+  64,	1616,	1584,	125,	1609,	1615,	1609,	1604,
+  1570,	247,	1600,	1548,	47,	8217,	1583,	215,
+  1563,	1614,	1569,	1613,	1601,	8216,	123,	1611,
+  1618,	1573,	126,	1580,	1688,	1670,	94,	95,
+  1662,	1588,	1584,	1586,	1740,	1579,	1576,	1604,
+  1575,	1607,	1578,	1606,	1605,	1574,	1583,	1582,
+  1581,	1590,	1602,	1587,	1601,	1593,	1585,	1589,
+  1591,	1594,	1592,	60,	124,	62,	1617
+];
+
+// Hebrew keyboard map based on Hebrew Keyboard Layout SI-1452 (Hebrew-QWERTY)
+// prettier-ignore
+var  hebrewTable = [
+  32,	33,	34,	35,	36,	37,	38,	44 /*,*/,
+  41,	40,	42,	43,	1514 /*tav*/,	45,	1509 /*zadikS*/,	46 /*.*/,
+  48,	49,	50,	51,	52,	53,	54,	55,
+  56,	57,	58,	1507 /*peyS*/,	60,	61,	62,	63,
+  64,	65,	66,	67,	68,	69,	70,	71,
+  72,	73,	74,	75,	76,	77,	78,	79,
+  80,	81,	82,	83,	84,	85,	86,	87,
+  88,	89,	90,	91,	92,	93,	94,	95,
+  59 /*;*/,	1513 /*shin*/,	1504 /*nun*/,	1489 /*bet*/,	1490 /*gimel*/,	1511 /*kuf*/,	1499 /*kaf*/,	1506 /*ain*/,
+  1497 /*yod*/,	1503 /*nunS*/,	1495 /*het*/,	1500 /*lamed*/,	1498 /*kafS*/,	1510 /*zadik*/,	1502 /*mem*/,	1501 /*memS*/,
+  1508 /*pey*/,	47 /* / */,	1512 /*reish*/,	1491 /*dalet*/,	1488 /*alef*/,	1493 /*vav*/,	1492 /*hey*/,	39 /*'*/,
+  1505 /*sameh*/,	1496 /*tet*/,	1494 /*zain*/,	123,	124,	125,	126
+];
+
+var Switcher = {
   // Farsi keyboard map based on Iran Popular Keyboard Layout
-  // prettier-ignore
-  farsiKey1: [
-		32,	33,	34,	35,	36,	37,	38,	44 /*,*/,
-		41,	40,	42,	43,	1514 /*tav*/,	45,	1509 /*zadikS*/,	46 /*.*/,
-		48,	49,	50,	51,	52,	53,	54,	55,
-		56,	57,	58,	1507 /*peyS*/,	44,	61,	46,	1567,
-		64,	1616,	1584,	125,	1609,	1615,	1609,	1604,
-		1570,	247,	1600,	1548,	47,	8217,	1583,	215,
-		1563,	1614,	1569,	1613,	1601,	8216,	123,	1611,
-		1618,	1573,	126,	91,	92,	93,	94,	95,
-		59 /*;*/,	1513 /*shin*/,	1504 /*nun*/,	1489 /*bet*/,	1490 /*gimel*/,	1511 /*kuf*/,	1499 /*kaf*/,	1506 /*ain*/,
-		1497 /*yod*/,	1503 /*nunS*/,	1495 /*het*/,	1500 /*lamed*/,	1498 /*kafS*/,	1510 /*zadik*/,	1502 /*mem*/,	1501 /*memS*/,
-		1508 /*pey*/,	47 /* / */,	1512 /*reish*/,	1491 /*dalet*/,	1488 /*alef*/,	1493 /*vav*/,	1492 /*hey*/,	39 /*'*/,
-		1505 /*sameh*/,	1496 /*tet*/,	1494 /*zain*/,	60,	124,	62,	126
-	],
-  // prettier-ignore
-  farsiKey: [
-		32,	33,	34,	35,	36,	37,	38,	44 /*,*/,
-		41,	40,	42,	43,	1514 /*tav*/,	45,	1509 /*zadikS*/,	46 /*.*/,
-		48,	49,	50,	51,	52,	53,	54,	55,
-		56,	57,	58,	1507 /*peyS*/,	60,	61,	62,	63,
-		64,	65,	66,	67,	68,	69,	70,	71,
-		72,	73,	74,	75,	76,	77,	78,	79,
-		80,	81,	82,	83,	84,	85,	86,	87,
-		88,	89,	90,	91,	92,	93,	94,	95,
-		59 /*;*/,	1513 /*shin*/,	1504 /*nun*/,	1489 /*bet*/,	1490 /*gimel*/,	1511 /*kuf*/,	1499 /*kaf*/,	1506 /*ain*/,
-		1497 /*yod*/,	1503 /*nunS*/,	1495 /*het*/,	1500 /*lamed*/,	1498 /*kafS*/,	1510 /*zadik*/,	1502 /*mem*/,	1501 /*memS*/,
-		1508 /*pey*/,	47 /* / */,	1512 /*reish*/,	1491 /*dalet*/,	1488 /*alef*/,	1493 /*vav*/,	1492 /*hey*/,	39 /*'*/,
-		1505 /*sameh*/,	1496 /*tet*/,	1494 /*zain*/,	123,	124,	125,	126
-],
+
+  keyTable: [],
 
   Type: true,
   counter: 0,
   ShowChangeLangButton: 1, // 0: Hidden / 1: Visible
   KeyBoardError: 0, // 0: Disable FarsiType / 1: Show Error
-  ChangeDir: 2, // 0: No Action / 1: Do Rtl-Ltr / 2: Rtl-Ltr button
+  ChangeDir: 0, // 0: No Action / 1: Do Rtl-Ltr / 2: Rtl-Ltr button
   UnSupportedAction: 0, //0: Disable FarsiType / 1: Low Support
 };
 
-FarsiType.enable_disable = function (Dis) {
+Switcher.enable_disable = function (Dis) {
   var invis, obj;
 
   if (!Dis.checked) {
-    FarsiType.Type = true;
+    Switcher.Type = true;
     disable = false;
     color = 'darkblue';
   } else {
-    FarsiType.Type = false;
+    Switcher.Type = false;
     disable = true;
     color = '#ECE9D8';
   }
 
-  if (FarsiType.ShowChangeLangButton == 1) {
-    for (var i = 1; i <= FarsiType.counter; i++) {
+  if (Switcher.ShowChangeLangButton == 1) {
+    for (var i = 1; i <= Switcher.counter; i++) {
       obj = document.getElementById('FarsiType_button_' + i);
       obj.disabled = disable;
       obj.style.backgroundColor = color;
@@ -111,15 +117,15 @@ FarsiType.enable_disable = function (Dis) {
   }
 };
 
-FarsiType.Disable = function () {
-  FarsiType.Type = false;
+Switcher.Disable = function () {
+  Switcher.Type = false;
   var Dis = document.getElementById('disableFarsiType');
   if (Dis != null) {
     Dis.checked = true;
   }
 
-  if (FarsiType.ShowChangeLangButton == 1) {
-    for (var i = 1; i <= FarsiType.counter; i++) {
+  if (Switcher.ShowChangeLangButton == 1) {
+    for (var i = 1; i <= Switcher.counter; i++) {
       obj = document.getElementById('FarsiType_button_' + i);
       obj.disabled = true;
       obj.style.backgroundColor = '#ECE9D8';
@@ -127,60 +133,73 @@ FarsiType.Disable = function () {
   }
 };
 
-FarsiType.init = function () {
+Switcher.init = function (event, lang = 'he') {
+  switch (lang.toLowerCase()) {
+    case 'he':
+    case 'he-il':
+      Switcher.keyTable = hebrewTable;
+      break;
+    case 'fa':
+    case 'fa-ir':
+      Switcher.keyTable = farsiTable;
+      break;
+  }
+
   var Inputs = document.getElementsByTagName('INPUT');
   for (var i = 0; i < Inputs.length; i++) {
     if (
       Inputs[i].type.toLowerCase() == 'text' &&
-      (Inputs[i].lang.toLowerCase() == 'fa' ||
-        Inputs[i].lang.toLowerCase() == 'fa-ir')
+      Inputs[i].dataset.lang &&
+      (Inputs[i].dataset.lang.toLowerCase() == 'he' ||
+        Inputs[i].dataset.lang.toLowerCase() == 'he-il')
     ) {
-      FarsiType.counter++;
-      new FarsiType.KeyObject(Inputs[i], FarsiType.counter);
+      Switcher.counter++;
+      new Switcher.KeyObject(Inputs[i], Switcher.counter);
     }
   }
 
   var Areas = document.getElementsByTagName('TEXTAREA');
   for (var i = 0; i < Areas.length; i++) {
     if (
-      Areas[i].lang.toLowerCase() == 'fa' ||
-      Areas[i].lang.toLowerCase() == 'fa-ir'
+      Areas[i].dataset.lang &&
+      (Areas[i].dataset.lang.toLowerCase() == 'he' ||
+        Areas[i].dataset.lang.toLowerCase() == 'he-il')
     ) {
-      FarsiType.counter++;
-      new FarsiType.KeyObject(Areas[i], FarsiType.counter);
+      Switcher.counter++;
+      new Switcher.KeyObject(Areas[i], Switcher.counter);
     }
   }
 
   var Dis = document.getElementById('disableFarsiType');
   if (Dis != null) {
-    FarsiType.enable_disable(Dis);
+    Switcher.enable_disable(Dis);
     Dis.onclick = new Function('FarsiType.enable_disable (this);');
   }
 };
 
-FarsiType.KeyObject = function (z, x) {
+Switcher.KeyObject = function (z, x) {
   GenerateStr = '';
-  if (FarsiType.ShowChangeLangButton == 1) {
+  if (Switcher.ShowChangeLangButton == 1) {
     GenerateStr =
       GenerateStr +
       "<input type='button' id=FarsiType_button_" +
       x +
-      " style='border: none; background-color:darkblue; font-size:11; color:white; font-family:tahoma; padding: 1px; margin: 1px; width: auto; height: auto;' value='FA' />&nbsp;";
+      " style='border: none; background-color:darkblue; font-size:11; color:white; font-family:tahoma; padding: 1px; margin: 1px; width: auto; height: auto; position: absolute' value='ע' />&nbsp;";
   }
-  if (FarsiType.ChangeDir == 2) {
+  if (Switcher.ChangeDir == 2) {
     GenerateStr =
       GenerateStr +
       "<input type='button' id=FarsiType_ChangeDir_" +
       x +
-      " style='border: none; background-color:darkblue; font-size:11; color:white; font-family:tahoma; padding: 1px; margin: 1px; width: auto; height: auto;' value='RTL' />";
+      " style='border: none; background-color:darkblue; font-size:11; color:white; font-family:tahoma; padding: 1px; margin: 1px; width: auto; height: auto; position: absolute' value='RTL' />";
   }
   z.insertAdjacentHTML('afterEnd', GenerateStr);
 
-  if (FarsiType.ShowChangeLangButton == 1) {
+  if (Switcher.ShowChangeLangButton == 1) {
     z.bottelm = document.getElementById('FarsiType_button_' + x);
     z.bottelm.title = 'Change lang to english';
   }
-  if (FarsiType.ChangeDir == 2) {
+  if (Switcher.ChangeDir == 2) {
     z.Direlm = document.getElementById('FarsiType_ChangeDir_' + x);
   }
 
@@ -216,24 +235,24 @@ FarsiType.KeyObject = function (z, x) {
   ChangeLang = function (e, ze) {
     if (ze) z = ze;
 
-    if (FarsiType.Type) {
+    if (Switcher.Type) {
       if (z.farsi) {
         z.farsi = false;
-        if (FarsiType.ShowChangeLangButton == 1) {
+        if (Switcher.ShowChangeLangButton == 1) {
           z.bottelm.value = 'EN';
-          z.bottelm.title = 'Change lang to persian';
+          z.bottelm.title = 'Change lang to hebrew';
         }
-        if (FarsiType.ChangeDir == 1) {
+        if (Switcher.ChangeDir == 1) {
           z.style.textAlign = 'left';
           z.style.direction = 'ltr';
         }
       } else {
         z.farsi = true;
-        if (FarsiType.ShowChangeLangButton == 1) {
-          z.bottelm.value = 'FA';
+        if (Switcher.ShowChangeLangButton == 1) {
+          z.bottelm.value = 'ע';
           z.bottelm.title = 'Change lang to english';
         }
-        if (FarsiType.ChangeDir == 1) {
+        if (Switcher.ChangeDir == 1) {
           z.style.textAlign = 'right';
           z.style.direction = 'rtl';
         }
@@ -256,7 +275,7 @@ FarsiType.KeyObject = function (z, x) {
       ChangeLang(e, z);
     }
 
-    if (FarsiType.Type) {
+    if (Switcher.Type) {
       if (
         (e.charCode != null && e.charCode != key) ||
         (e.which != null && e.which != key) ||
@@ -271,8 +290,8 @@ FarsiType.KeyObject = function (z, x) {
 
       //check windows lang
       if (key > 128) {
-        if (FarsiType.KeyBoardError == 0) {
-          FarsiType.Disable();
+        if (Switcher.KeyBoardError == 0) {
+          Switcher.Disable();
         } else {
           alert('Please change your windows language to English');
           return false;
@@ -280,7 +299,7 @@ FarsiType.KeyObject = function (z, x) {
       }
 
       // If Farsi
-      if (FarsiType.Type && z.farsi) {
+      if (Switcher.Type && z.farsi) {
         //check CpasLock
         if (
           (key >= 65 && key <= 90 && !e.shiftKey) ||
@@ -294,7 +313,7 @@ FarsiType.KeyObject = function (z, x) {
 
         // Shift-space -> ZWNJ
         if (key == 32 && e.shiftKey) key = 8204;
-        else key = FarsiType.farsiKey[key - 32];
+        else key = Switcher.keyTable[key - 32];
 
         key = typeof key == 'string' ? key : String.fromCharCode(key);
 
@@ -352,9 +371,9 @@ FarsiType.KeyObject = function (z, x) {
               );
             } catch (error) {
               //OTHERWISE
-              if (FarsiType.UnSupportedAction == 0) {
+              if (Switcher.UnSupportedAction == 0) {
                 alert('Sorry! no FarsiType support');
-                FarsiType.Disable();
+                Switcher.Disable();
                 var Dis = document.getElementById('disableFarsiType');
                 if (Dis != null) {
                   Dis.disabled = true;
@@ -374,17 +393,17 @@ FarsiType.KeyObject = function (z, x) {
     return true;
   };
 
-  if (FarsiType.ShowChangeLangButton == 1) {
+  if (Switcher.ShowChangeLangButton == 1) {
     z.bottelm.onmouseup = ChangeLang;
   }
-  if (FarsiType.ChangeDir == 2) {
+  if (Switcher.ChangeDir == 2) {
     z.Direlm.onmouseup = ChangeDirection;
   }
   z.onkeypress = Convert;
 };
 
 if (window.attachEvent) {
-  window.attachEvent('onload', FarsiType.init);
+  window.attachEvent('onload', Switcher.init);
 } else if (window.addEventListener) {
-  window.addEventListener('load', FarsiType.init, false);
+  window.addEventListener('load', Switcher.init, false);
 }

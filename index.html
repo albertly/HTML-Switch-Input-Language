@@ -11,14 +11,33 @@
     .container {
         width: 50%;
         margin: 50px auto;
-        background: #cccc;
+        background-color: lightgray;
+    }
+
+    .field {
+        padding: 10px;
+    }
+
+    label {
+        display: block;
     }
 </style>
 
 <body>
     <div dir="rtl" class="container">
-        <div><input type="text" name="whatever" lang="fa" /></div>
-        <div> <input type="text" name="txtHeb" id="txtHeb" onkeypress="printKey()" /> </div>
+        <div class="container">
+            <div class="field">
+                <label for="hebInput">טקסט </label>
+                <input type="text" name="hebInput" id="hebInput" data-lang="he" />
+            </div>
+            <div class="field">
+                <label for="hebArea">אזור טקסט</label>
+                <textarea cols="22" rows="7" name="hebArea" id="hebArea" data-lang="he"> </textarea> </div>
+            <div class="field">
+                <label for="normInput">Normal Input</label>
+                <input type="text" name="normInput" id="normInput" onkeypress="printKey()" />
+            </div>
+        </div>
     </div>
 </body>
 <script src="./SwitchInputLan.js"></script>
