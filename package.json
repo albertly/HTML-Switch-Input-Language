@@ -1,0 +1,25 @@
+{
+  "name": "switch-input-lang",
+  "version": "1.0.2",
+  "description": "Change keyboard layout automatically using JavaScript in HTML",
+  "main": "SwitchInputLan.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertly/HTML-Switch-Input-Language.git"
+  },
+  "keywords": [
+    "language",
+    "rtl",
+    "keyboard",
+    "layout"
+  ],
+  "author": "Albert Lyubarsky",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/albertly/HTML-Switch-Input-Language/issues"
+  },
+  "homepage": "https://github.com/albertly/HTML-Switch-Input-Language#readme"
+}

@@ -138,7 +138,11 @@ Switcher.Disable = function () {
   }
 };
 
-Switcher.init = function (event, lang = 'he') {
+Switcher.init = function (event, lang) {
+  if (lang === undefined) {
+    lang = 'he';
+  }
+
   switch (lang.toLowerCase()) {
     case 'he':
     case 'he-il':
